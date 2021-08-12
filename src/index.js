@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Unsplash from './api/unsplash';
 import Image from './components/Image';
-import SearchBar from './components/SearchBar';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,12 +14,6 @@ class App extends React.Component {
   onFormSubmit = async (event) => {
       event.preventDefault();
       this.getImages(this.state.keyword);
-      
-      // With class-based components, we require to refer to 'this' to access the props object.
-      // onSearchSubmit is the property name that we copy
-      // set in our App component that holds the onSearchSubmit() callback.
-      // Now we can pass this.state.term to the App component.
-      // this.props.onSearchSubmit(this.state.term);
   }
 
   getImages = async (searchterm) => {
@@ -31,7 +24,7 @@ class App extends React.Component {
 
   
   componentDidMount(){
-    this.getImages("pennywise");
+    this.getImages("car");
   }
 
   handleChange = (e) => {
@@ -39,15 +32,20 @@ class App extends React.Component {
   }
 
   render() {
-    let imageList = this.state.images.map((image) => <Image key={image.id} image={image}/>);
+    let imageList = this.state.images.map((image) => <Image className="brick" key={image.id} image={image}/>);
     return (
-      <>
-        <form onSubmit={this.onFormSubmit}>
-          <input type="text" value={this.state.keyword} onChange={(e)=>{ this.handleChange(e) }} />
-          <button type="submit">Search</button>
+      <div className="ui container">
+        <form className="ui fluid container" onSubmit={this.onFormSubmit}>
+          <label>Image Search</label>
+          <div class="ui input">
+            <input type="text" value={this.state.keyword} onChange={(e)=>{ this.handleChange(e) }} />
+          </div>
+          <button className="ui button" type="submit">Search</button>
         </form>
-        {imageList}
-      </>
+        <div className="masonry">
+          {imageList}
+        </div>
+      </div>
     );
   }
 };

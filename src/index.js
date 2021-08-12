@@ -8,16 +8,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        term: '',
         keyword: "",
         images: [],
     };
   }
   onFormSubmit = async (event) => {
       event.preventDefault();
-      let images = await Unsplash.get(`/search/photos?client_id=K_YCGcfW_d1wlNvx0PPumBmlp6c9lCN5xQKMaTAHjr8&query=${this.state.keyword}`);
-      // this.setState({ images:images.data }); 
-      console.log(images.data);
+      this.getImages(this.state.keyword);
+      
       // With class-based components, we require to refer to 'this' to access the props object.
       // onSearchSubmit is the property name that we copy
       // set in our App component that holds the onSearchSubmit() callback.
@@ -25,18 +23,16 @@ class App extends React.Component {
       // this.props.onSearchSubmit(this.state.term);
   }
 
-  getImages = async () => {
-    let images = await Unsplash.get("/photos?client_id=K_YCGcfW_d1wlNvx0PPumBmlp6c9lCN5xQKMaTAHjr8");
-    this.setState({ images:images.data }); 
+  getImages = async (searchterm) => {
+    let images = await Unsplash.get(`/search/photos?client_id=K_YCGcfW_d1wlNvx0PPumBmlp6c9lCN5xQKMaTAHjr8&query=${searchterm}`);
+    console.log(images.data.results);
+    this.setState({ images:images.data.results }); 
   }
 
+  
   componentDidMount(){
-    this.getImages();
+    this.getImages("pennywise");
   }
-
-  // componentDidUpdate(){
-
-  // }
 
   handleChange = (e) => {
       this.setState({ keyword:e.target.value })

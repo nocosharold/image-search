@@ -21,7 +21,6 @@ class App extends React.Component {
     console.log(images.data.results);
     this.setState({ images:images.data.results }); 
   }
-
   
   componentDidMount(){
     this.getImages("car");
@@ -36,11 +35,17 @@ class App extends React.Component {
     return (
       <div className="ui container">
         <form className="ui fluid container" onSubmit={this.onFormSubmit}>
-          <label>Image Search</label>
+          {/* <label>Image Search</label>
           <div class="ui input">
             <input type="text" value={this.state.keyword} onChange={(e)=>{ this.handleChange(e) }} />
           </div>
-          <button className="ui button" type="submit">Search</button>
+          <button className="ui button" type="submit">Search</button> */}
+          <div class="ui action input">
+            <input type="text" value={this.state.keyword} onChange={(e)=>{ this.handleChange(e) }} placeholder="e.g. car" />
+            <button  type="submit" class="ui icon button">
+              <i class="search icon"></i>
+            </button>
+          </div>
         </form>
         <div className="masonry">
           {imageList}

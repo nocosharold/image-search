@@ -35,11 +35,6 @@ class App extends React.Component {
     return (
       <div className="ui container">
         <form className="ui fluid container" onSubmit={this.onFormSubmit}>
-          {/* <label>Image Search</label>
-          <div class="ui input">
-            <input type="text" value={this.state.keyword} onChange={(e)=>{ this.handleChange(e) }} />
-          </div>
-          <button className="ui button" type="submit">Search</button> */}
           <div class="ui action input">
             <input type="text" value={this.state.keyword} onChange={(e)=>{ this.handleChange(e) }} placeholder="e.g. car" />
             <button  type="submit" class="ui icon button">
